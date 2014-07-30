@@ -26,6 +26,10 @@ public class MacAddressTest {
 		new MacAddress("00:11:22:33:44:55");
 		new MacAddress("00-11-22-33-44-55");
 		new MacAddress("0-1-2-3-4-5");
+		
+		new MacAddress(" 00:11:22:33:44:55 ");
+		new MacAddress(" 00-11-22-33-44-55 ");
+		new MacAddress(" 0-1-2-3-4-5 ");
 	}
 
 	@Test(expected=IllegalArgumentException.class)
@@ -36,6 +40,21 @@ public class MacAddressTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void malformedTest2() {
 		new MacAddress("00:11:22:33:44:ag");
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void malformedTest3() {
+		new MacAddress("a 00:11:22:33:44:ae");
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void malformedTest4() {
+		new MacAddress("a 00:11:22:33:44:ae");
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void malformedTest5() {
+		new MacAddress("aa:00:11:22:33:44:ae aa:00:11:22:33:44:ae");
 	}
 
 	@Test

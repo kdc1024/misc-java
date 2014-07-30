@@ -1,4 +1,5 @@
 misc-java
 =========
 
-misc-java code
+This is some miscellaneous Java code that I wrote.
+

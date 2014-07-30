@@ -35,17 +35,17 @@ import java.util.regex.Matcher;
 public class MacAddress {
 	
 	// This array holds the raw bytes
-	short[] address = new short[6];  // no unsigned ints in Java....
+	private short[] address;    // no unsigned ints in Java....
 	
 	// This array holds what the author has arbitrarily decided is a good String
 	// representation of this object.  The string will look like this:
 	//
 	//        00:0a:0b:0c:0d:0e
-	String string;
+	private String string;
 	
 	///////////////////////////////////////////////////////////////////////////
 	
-	static final Pattern pattern1;
+	private static final Pattern pattern1;
 	
 	static {
 		pattern1 = Pattern.compile("^\\s*" + 
@@ -105,7 +105,9 @@ public class MacAddress {
 			throw new IllegalArgumentException("Malformed MAC Address: " + s);
 		}
 
-		System.arraycopy(mmr.address, 0, this.address, 0, 6);
+		this.address = mmr.address;
+		mmr.address = null;
+		
 		this.string = String.format("%02x:%02x:%02x:%02x:%02x:%02x", 
 					this.address[0], 
 					this.address[1],
@@ -141,7 +143,17 @@ public class MacAddress {
 	///////////////////////////////////////////////////////////////////////////
 	public int hashCode()
 	{
-		return string.hashCode();
+		int result = 19;
+		
+		result = 31 * result + this.address[0];
+		result = 31 * result + this.address[1];
+		result = 31 * result + this.address[2];
+		result = 31 * result + this.address[3];
+		result = 31 * result + this.address[4];
+		result = 31 * result + this.address[5];
+		result = 31 * result + this.string.hashCode();
+		
+		return result;
 	}
 	
 }
