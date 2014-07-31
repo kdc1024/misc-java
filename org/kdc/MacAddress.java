@@ -32,7 +32,9 @@ import java.util.regex.Matcher;
 //               embedded in the system.  It is my belief that if a MacAddress object
 //               exists in a running system, that the object should be valid.
 
-public class MacAddress {
+public class MacAddress 
+	implements Comparable
+{
 	
 	// This array holds the raw bytes
 	private short[] address;    // no unsigned ints in Java....
@@ -156,4 +158,20 @@ public class MacAddress {
 		return result;
 	}
 	
+	public int compareTo(Object o) 
+	{
+		if (! (o instanceof MacAddress)) {
+			throw new ClassCastException("Not a MacAddress");
+		}
+		
+		MacAddress that = (MacAddress)o;
+		
+		for (int i=0; i<6; i++) {
+			if (this.address[i] != that.address[i]) {
+				return this.address[i] - that.address[i];
+			}
+		}
+		
+		return 0;
+	}
 }

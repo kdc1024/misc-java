@@ -80,4 +80,29 @@ public class MacAddressTest {
 		
 		assertTrue(a.hashCode() == b.hashCode());
 	}
+	
+	@Test
+	public void compareToTest1() {
+		MacAddress a = new MacAddress("00:00:00:00:00:00");
+		MacAddress b = new MacAddress("00:00:00:00:00:00");
+		
+		assertTrue(a.compareTo(b) == 0);
+	}
+	
+	@Test
+	public void compareToTest2() {
+		MacAddress a = new MacAddress("00:00:00:00:00:00");
+		MacAddress b = new MacAddress("00:00:00:00:00:01");
+		
+		assertTrue(a.compareTo(b) < 0);
+	}
+	
+	@Test
+	public void compareToTest3() {
+		MacAddress a = new MacAddress("00:00:00:00:00:01");
+		MacAddress b = new MacAddress("00:00:00:00:00:00");
+		
+		assertTrue(a.compareTo(b) > 0);
+	}
+	
 }
