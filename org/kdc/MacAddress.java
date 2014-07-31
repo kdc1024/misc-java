@@ -160,10 +160,6 @@ public class MacAddress
 	
 	public int compareTo(Object o) 
 	{
-		if (! (o instanceof MacAddress)) {
-			throw new ClassCastException("Not a MacAddress");
-		}
-		
 		MacAddress that = (MacAddress)o;
 		
 		for (int i=0; i<6; i++) {
